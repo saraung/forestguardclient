@@ -1,4 +1,3 @@
-// app/(tabs)/_layout.tsx
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -7,10 +6,11 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "#166534", // green-800
-        tabBarInactiveTintColor: "#6b7280", // gray-500
+        tabBarActiveTintColor: "#166534",
+        tabBarInactiveTintColor: "#6b7280",
       }}
     >
+      {/* Dashboard */}
       <Tabs.Screen
         name="dashboard"
         options={{
@@ -21,6 +21,7 @@ export default function TabsLayout() {
         }}
       />
 
+      {/* Alerts (MAIN TAB) */}
       <Tabs.Screen
         name="alerts"
         options={{
@@ -31,6 +32,13 @@ export default function TabsLayout() {
         }}
       />
 
+      {/* Hide alert details route */}
+      <Tabs.Screen
+        name="alerts/[id]"
+        options={{ href: null }}
+      />
+
+      {/* Map */}
       <Tabs.Screen
         name="map"
         options={{
@@ -41,6 +49,7 @@ export default function TabsLayout() {
         }}
       />
 
+      {/* Profile */}
       <Tabs.Screen
         name="profile"
         options={{
