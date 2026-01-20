@@ -1,5 +1,11 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import type { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
+
+type TabBarIconProps = {
+  color: string;
+  size: number;
+};
 
 export default function TabsLayout() {
   return (
@@ -10,51 +16,43 @@ export default function TabsLayout() {
         tabBarInactiveTintColor: "#6b7280",
       }}
     >
-      {/* Dashboard */}
       <Tabs.Screen
         name="dashboard"
         options={{
           title: "Dashboard",
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color, size }: TabBarIconProps) => (
             <Ionicons name="home-outline" size={size} color={color} />
           ),
         }}
       />
 
-      {/* Alerts (MAIN TAB) */}
       <Tabs.Screen
         name="alerts"
         options={{
           title: "Alerts",
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color, size }: TabBarIconProps) => (
             <Ionicons name="alert-circle-outline" size={size} color={color} />
           ),
         }}
       />
 
-      {/* Hide alert details route */}
-      <Tabs.Screen
-        name="alerts/[id]"
-        options={{ href: null }}
-      />
+      <Tabs.Screen name="alerts/[id]" options={{ href: null }} />
 
-      {/* Map */}
       <Tabs.Screen
         name="map"
         options={{
           title: "Map",
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color, size }: TabBarIconProps) => (
             <Ionicons name="map-outline" size={size} color={color} />
           ),
         }}
       />
 
-      {/* Profile */}
       <Tabs.Screen
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color, size }: TabBarIconProps) => (
             <Ionicons name="person-outline" size={size} color={color} />
           ),
         }}
