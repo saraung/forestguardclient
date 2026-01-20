@@ -1,4 +1,3 @@
-// hooks/useAlerts.ts
 import { useEffect, useState } from "react";
 import {
   getActiveAlerts,
@@ -28,7 +27,7 @@ export function useAlerts(mode: AlertsMode = "active") {
   async function acknowledge(id: number) {
     await acknowledgeAlert(id);
     if (mode === "active") {
-      await load(); // refresh active list
+      await load();
     }
   }
 
@@ -38,6 +37,7 @@ export function useAlerts(mode: AlertsMode = "active") {
 
   return {
     alerts,
+    setAlerts,   // 🔑 expose setter for SSE
     loading,
     reload: load,
     acknowledge,

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ScrollView, Text, View, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAlerts } from "@/hooks/useAlerts";
+import { useAlertStream } from "@/hooks/useAlertStream";
 import { router } from "expo-router";
 
 function severity(type: string) {
@@ -33,12 +34,22 @@ function severity(type: string) {
 
 export default function Alerts() {
   const [mode, setMode] = useState<"active" | "history">("active");
-  const { alerts, loading } = useAlerts(mode);
+  const { alerts, setAlerts, loading } = useAlerts(mode);
+
+  // 🔥 REALTIME SSE (THIS IS THE FIX)
+  useAlertStream((alert) => {
+    if (mode !== "active") return;
+    if (alert.acknowledged) return;
+
+    setAlerts((prev) => {
+      if (prev.some((a) => a.id === alert.id)) return prev;
+      return [alert, ...prev];
+    });
+  });
 
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
       <ScrollView contentContainerStyle={{ padding: 16 }}>
-
         {/* Header */}
         <View className="mb-5">
           <Text className="text-3xl font-bold text-gray-900">
@@ -51,7 +62,7 @@ export default function Alerts() {
           </Text>
         </View>
 
-        {/* Active / Resolved toggle */}
+        {/* Toggle */}
         <View className="flex-row bg-white border border-gray-200 rounded-xl mb-6 overflow-hidden">
           <Pressable
             onPress={() => setMode("active")}
@@ -59,13 +70,7 @@ export default function Alerts() {
               mode === "active" ? "bg-gray-100" : ""
             }`}
           >
-            <Text
-              className={`text-center text-base font-semibold ${
-                mode === "active"
-                  ? "text-gray-900"
-                  : "text-gray-500"
-              }`}
-            >
+            <Text className="text-center font-semibold">
               Active
             </Text>
           </Pressable>
@@ -76,26 +81,20 @@ export default function Alerts() {
               mode === "history" ? "bg-gray-100" : ""
             }`}
           >
-            <Text
-              className={`text-center text-base font-semibold ${
-                mode === "history"
-                  ? "text-gray-900"
-                  : "text-gray-500"
-              }`}
-            >
+            <Text className="text-center font-semibold">
               Resolved
             </Text>
           </Pressable>
         </View>
 
         {loading && (
-          <Text className="text-base text-gray-500">
+          <Text className="text-gray-500">
             Loading alerts…
           </Text>
         )}
 
         {!loading && alerts.length === 0 && (
-          <Text className="text-base text-gray-500">
+          <Text className="text-gray-500">
             No alerts found
           </Text>
         )}
@@ -117,33 +116,23 @@ export default function Alerts() {
               <View
                 className={`bg-white ${s.border} border rounded-2xl p-5`}
               >
-                {/* Title row */}
-                <View className="flex-row justify-between items-start mb-2">
-                  <Text
-                    className={`text-lg font-bold ${s.title}`}
-                  >
+                <View className="flex-row justify-between mb-2">
+                  <Text className={`text-lg font-bold ${s.title}`}>
                     {alert.type.toUpperCase()}
                   </Text>
 
-                  <View
-                    className={`px-3 py-1 rounded-full ${s.badge}`}
-                  >
-                    <Text className="text-sm font-semibold">
+                  <View className={`px-3 py-1 rounded-full ${s.badge}`}>
+                    <Text className="font-semibold">
                       {s.label}
                     </Text>
                   </View>
                 </View>
 
-                {/* Device */}
-                <Text className="text-base text-gray-700">
-                  Device{" "}
-                  <Text className="font-semibold">
-                    {alert.deviceId}
-                  </Text>
+                <Text className="text-gray-700">
+                  Device <Text className="font-semibold">{alert.deviceId}</Text>
                 </Text>
 
-                {/* Time */}
-                <Text className="text-base text-gray-600 mt-1">
+                <Text className="text-gray-600 mt-1">
                   {new Date(alert.timestamp).toLocaleString("en-IN", {
                     timeZone: "Asia/Kolkata",
                     dateStyle: "medium",
@@ -155,7 +144,6 @@ export default function Alerts() {
             </Pressable>
           );
         })}
-
       </ScrollView>
     </SafeAreaView>
   );
