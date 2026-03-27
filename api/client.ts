@@ -3,7 +3,8 @@ import axios from "axios";
 import { useAuthStore } from "@/store/auth.store";
 
 export const api = axios.create({
-  baseURL: "http://10.149.108.114:8070",
+  // baseURL: "http://10.149.108.114:8070",
+  baseURL: "https://grim-godiva-srg-319c4e53.koyeb.app",
 });
 
 api.interceptors.request.use((config) => {
