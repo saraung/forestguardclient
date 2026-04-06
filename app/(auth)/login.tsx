@@ -26,7 +26,7 @@ export default function Login() {
 
       await login(email, password);
 
-      // success → auth state updates → index.tsx redirects
+      
       router.replace("/(tabs)/dashboard");
     } catch (err) {
       setError("Invalid email or password");

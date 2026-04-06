@@ -74,7 +74,7 @@ export default function Profile() {
           </TouchableOpacity>
         </View>
 
-        {/* Logout */}
+ 
         <TouchableOpacity
           className="bg-red-600 py-3 rounded-lg"
           onPress={handleLogout}

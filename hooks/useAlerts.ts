@@ -37,7 +37,7 @@ export function useAlerts(mode: AlertsMode = "active") {
 
   return {
     alerts,
-    setAlerts,   // 🔑 expose setter for SSE
+    setAlerts,  
     loading,
     reload: load,
     acknowledge,
