@@ -5,7 +5,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Map() {
   const { alerts, loading } = useAlerts();
-
   const initialRegion = {
     latitude: alerts[0]?.latitude ?? 10.8505,
     longitude: alerts[0]?.longitude ?? 76.2711,
@@ -65,7 +64,7 @@ export default function Map() {
                     elevation: 5,
                   }}
                 >
-                  {/* center dot */}
+                  
                   <View
                     style={{
                       width: 6,

@@ -17,13 +17,12 @@ export async function getActiveAlerts(): Promise<AlertResponse[]> {
   return response.data;
 }
 
-// History alerts (acknowledged = true)
 export async function getHistoryAlerts(): Promise<AlertResponse[]> {
   const response = await api.get("/api/alerts/history");
   return response.data;
 }
 
-// Acknowledge alert
+
 export async function acknowledgeAlert(alertId: number): Promise<void> {
   await api.post(`/api/alerts/${alertId}/acknowledge`);
 }
