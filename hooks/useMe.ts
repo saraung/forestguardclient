@@ -1,4 +1,4 @@
-// hooks/useMe.ts
+
 import { useEffect, useState } from "react";
 import { getMeApi, MeResponse } from "@/api/users.api";
 

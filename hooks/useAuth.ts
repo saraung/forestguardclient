@@ -1,4 +1,4 @@
-// hooks/useAuth.ts
+
 import { useEffect } from "react";
 import { loginApi } from "@/api/auth.api";
 import { useAuthStore } from "@/store/auth.store";
