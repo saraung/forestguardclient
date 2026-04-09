@@ -1,4 +1,4 @@
-// api/auth.api.ts
+
 import { api } from "./client";
 
 export type LoginResponse = {
