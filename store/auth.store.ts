@@ -1,11 +1,10 @@
-// store/auth.store.ts
+
 import { create } from "zustand";
 import { Platform } from "react-native";
 import * as SecureStore from "expo-secure-store";
 
 const TOKEN_KEY = "auth_token";
 
-// Web fallback storage (memory only)
 let webToken: string | null = null;
 
 type AuthState = {
