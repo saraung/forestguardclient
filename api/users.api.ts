@@ -1,4 +1,4 @@
-// api/users.api.ts
+
 import { api } from "./client";
 
 export type MeResponse = {
