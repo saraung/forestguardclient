@@ -9,7 +9,7 @@ export type MeResponse = {
   emailVerified: boolean;
 };
 
-// GET /api/users/me
+
 export async function getMeApi(): Promise<MeResponse> {
   const response = await api.get("/api/users/me");
   return response.data;

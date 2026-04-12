@@ -27,7 +27,6 @@ export async function acknowledgeAlert(alertId: number): Promise<void> {
   await api.post(`/api/alerts/${alertId}/acknowledge`);
 }
 
-// Get single alert by id (details page)
 export async function getAlertById(
   id: number
 ): Promise<AlertResponse> {
