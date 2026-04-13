@@ -1,4 +1,4 @@
-// api/alerts.api.ts
+
 import { api } from "./client";
 
 export type AlertResponse = {
@@ -11,7 +11,7 @@ export type AlertResponse = {
   acknowledged: boolean;
 };
 
-// Active alerts (acknowledged = false)
+
 export async function getActiveAlerts(): Promise<AlertResponse[]> {
   const response = await api.get("/api/alerts");
   return response.data;
