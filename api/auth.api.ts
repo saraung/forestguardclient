@@ -14,11 +14,10 @@ export async function loginApi(
     password,
   });
 
-  // Axios automatically throws on 4xx/5xx
   return response.data; // { token }
 }
 
 export async function meApi(): Promise<string> {
   const response = await api.get("/api/auth/me");
-  return response.data; // "Authenticated user"
+  return response.data; 
 }
