@@ -87,7 +87,6 @@ export default function Login() {
               />
             </View>
 
-            {/* Password */}
             <View className="mb-6">
               <Text className="text-xs uppercase text-gray-500 mb-1 tracking-wider">
                 Password
@@ -101,7 +100,7 @@ export default function Login() {
               />
             </View>
 
-            {/* Login Button */}
+          
             <TouchableOpacity
               disabled={loading}
               className={`py-3.5 rounded-xl mt-2 ${
